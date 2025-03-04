@@ -4,6 +4,12 @@
  */
 
 /**
+ * ++++ ADD YOUR FIREBASE CONFIGURATION BELOW ++++
+ * === Firebase Apikey and Domain ===
+ */
+
+
+/**
  * Firebase configuration
  * @type {{apiKey: string, authDomain: string}}
  */
