@@ -1,11 +1,36 @@
 # Cloud Run App with OAuth2 and Firestore
 
 ## Overview
-This project involves building a web application that implements authentication and authorization using OAuth2 with Google's Identity Platform. The backend is a FastAPI web server that serves HTML pages and interacts with Firestore as the datastore. The frontend will use vanilla JavaScript to send data to the backend API.
+In this assignment we will build a web application that has authentication and
+authorization, a service layer that serves a UI and interacts with a data
+store, and a persistent data storage layer.
 
-You will deploy the FastAPI server on **Google Cloud Run**, use **Google Cloud Identity Platform** for OAuth2 authentication, and **Firestore** for handling user data and application-related information.
+The web application allows users to vote on the long disputed Tabs vs Spaces
+problem. Users can login and make their voice heard! 
+ 
+You will deploy the web server on **Google Cloud Run**, use **Google Cloud Identity Platform** for OAuth2 authentication, and **Firestore** for handling user data and application-related information.
 
 ### YOUR APPLICATION URL HERE!
+
+## Architecture
+
+```mermaid
+graph TD;
+    subgraph "Frontend"
+        UI[Static UI] -->|Authenticates with| Firebase
+    end
+
+    subgraph "Backend (FastAPI Server)"
+        FastAPI[FastAPI Server] -->|Serves| UI
+        FastAPI -->|Interacts with| Firestore
+    end
+
+    subgraph "Google Services"
+        Firebase -->|Handles Authentication| GoogleID[Google ID Platform]
+        Firestore[Firestore Database]
+    end
+
+    UI -->|Uses Firebase SDK| Firebase
 
 ## Addition Docs
 

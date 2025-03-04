@@ -3,7 +3,10 @@
 ---
 
 ## Overview
-This document provides guidance on the client-side JavaScript implementation for the project. The frontend interacts with Firebase Authentication and communicates with the FastAPI backend to submit user votes. The main JavaScript file handling this logic is `static/firebase.js`, and the firebase config is stored in `static/config.js`.
+This document provides guidance on the client-side JavaScript implementation for the assignment. The client-side code consists of HTML/CSS/javascript, and  is served when a user navigates to the index or root of our server (/). The web server returns the frontend application via server side rendered template. 
+
+The frontend code has two responsibilities besides the styling of the applicaiton. They are handling login process with Google's Identity Platform and sending data to the backend when a user submits votes. The main JavaScript file handling this logic is `static/firebase.js`, and the firebase config is stored in `static/config.js`.
+
 
 ### **__Your jobs is to implement the following:__**
 
@@ -24,6 +27,7 @@ const config = {
 ---
 
 ## Client-Side JavaScript
+
 The frontend includes a JavaScript file `static/firestore.js` the handles UI interactions with Firebase Authentication and sends user votes to the FastAPI backend.
 
 You should update the `vote` function, such that it makes a POST request to the backend API. 
@@ -52,3 +56,21 @@ export default firebaseConfig;
 --- 
 
 ## HTML Event Listeners
+
+The application includes a [HTML template](../template/index.html) that is
+served by the web server. This HTML ultimately draws the skeleton of our
+Document Object Model (DOM), and we need to add [event
+listeners](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) on the
+login/logout and vote buttons.
+
+You should find the elements in the DOM by ID using the `document` API, and
+attach an `onclick` event listener to trigger you action. The actions will be
+a calling the `vote` (on the TABS/SPACES button) or `toggle` (signin / signout)
+functions. The `toggle` function is already implemented.
+
+```javascript
+document.getElementById("someID").addEventListener("click", function () {
+  someFunction("TABS");
+});
+```
+
