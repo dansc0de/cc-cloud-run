@@ -1,4 +1,4 @@
-# Client-Side JavaScript README
+# Client-Side JavaScript
 
 ---
 
@@ -7,26 +7,17 @@ This document provides guidance on the client-side JavaScript implementation for
 
 The frontend code has two responsibilities besides the styling of the applicaiton. They are handling login process with Google's Identity Platform and sending data to the backend when a user submits votes. The main JavaScript file handling this logic is `static/firebase.js`, and the firebase config is stored in `static/config.js`.
 
-
-### **__Your jobs is to implement the following:__**
-
-1. Update the client-side JavaScript function in the [firestore.js](../cc_cloud_run/static/firestore.js) file
-    - Implement the `vote` function that sends a POST request to the FastAPI backend.
-    - The request should be ContentType `application/x-www-form-urlencoded` with the `team` (either "TABS" or "SPACES") as form data.
-    - The request should pass an Authorization header with the value `Bearer <ID_TOKEN>` where `<ID_TOKEN>` is the user's ID token.
-    - Handle the response by displaying a success message or an error message in case of failure.
-2. Update the [config.js](../cc_cloud_run/static/config.js) file with your Firebase configuration.
-```typescript
-const config = {
-  apiKey: 'AIzaSyDhwsk8Ak...',
-  authDomain: '[PROJECT].firebaseapp.com',
-};
-```
-3. Configure the Event Listeners for the Sign-In and Vote Buttons in `index.html`.
-
 ---
 
-## Client-Side JavaScript
+## **__Your jobs is to implement the following:__**
+
+### Step 1: Update the client-side JavaScript 
+The [firestore.js](../cc_cloud_run/static/firestore.js) file is partially implemented. You need to complete the following tasks:
+
+- Implement the `vote` function that sends a POST request to the FastAPI backend.
+- The request should be ContentType `application/x-www-form-urlencoded` with the `team` (either "TABS" or "SPACES") as form data.
+- The request should pass an Authorization header with the value `Bearer <ID_TOKEN>` where `<ID_TOKEN>` is the user's ID token.
+- Handle the response by displaying a success message or an error message in case of failure.
 
 The frontend includes a JavaScript file `static/firestore.js` the handles UI interactions with Firebase Authentication and sends user votes to the FastAPI backend.
 
@@ -42,7 +33,7 @@ You should update the `vote` function, such that it makes a POST request to the 
 - [docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
 ### `static/config.js`
-You should update the `static/config.js` file with Firebase configuration:
+You should update the `static/config.js` file with Firebase configuration that you can get from the Identity Platform Console:
 
 ```javascript
 const firebaseConfig = {
@@ -53,9 +44,10 @@ const firebaseConfig = {
 export default firebaseConfig;
 ```
 
---- 
+### Step 2: Configure the Event Listeners 
+The [index.html](../docs/template/index.html) file contains the HTML template for the application. You need to add event listeners to the login/logout and vote buttons.
 
-## HTML Event Listeners
+#### HTML Event Listeners
 
 The application includes a [HTML template](../template/index.html) that is
 served by the web server. This HTML ultimately draws the skeleton of our
@@ -73,4 +65,4 @@ document.getElementById("someID").addEventListener("click", function () {
   someFunction("TABS");
 });
 ```
-
+--- 

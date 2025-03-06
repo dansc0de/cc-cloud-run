@@ -1,5 +1,7 @@
 # Cloud Run App with OAuth2 and Firestore
 
+---
+
 ## Overview
 In this assignment we will build a web application that has authentication and
 authorization, a service layer that serves a UI and interacts with a data
@@ -10,7 +12,19 @@ problem. Users can login and make their voice heard!
  
 You will deploy the web server on **Google Cloud Run**, use **Google Cloud Identity Platform** for OAuth2 authentication, and **Firestore** for handling user data and application-related information.
 
+---
+
 ### YOUR APPLICATION URL HERE!
+
+---
+
+## Docs
+- [backend](docs/python-backend.md)
+- [client](docs/client-side-js.md)
+- [firestore](docs/firestore.md)
+- [cloud run](docs/cloud-run.md)
+- [oauth2](docs/oauth2.md)
+
 
 ## Architecture
 
@@ -57,34 +71,42 @@ The project is already set up to run with Docker Compose. The setup includes:
    cd <project_directory>
    ```
 
-2. **Start the application using Docker Compose**
+## Local development setup
+We are using docker compose to run the FastAPI server and Firestore emulator locally. The compose file is mounting the `./cc_cloud_run` directory to the `/app` directory in the container, so you can start the compose stack and start developing.
+
+__**note: you can run the application without authentication by adding `?auth=false` to the query parameters**__
+
+1. **Start the application using Docker Compose**
    ```sh
    docker compose up --build
    ```
 
-3. **Access the application**
+2. **Access the application**
    - FastAPI Server: [http://localhost:9080](http://localhost:9080)
    - Firestore Emulator: [http://localhost:8080](http://localhost:8080)
    - Disable authentication by adding `?auth=false` to the query parameters
 
 ## Rubric (Total: 15 Points)
-| Criteria | Points |
-|----------|--------|
-| OAuth2 login works using Google Identity Platform | 5 pts |
-| Web server works with client-side JavaScript posting to backend | 5 pts |
-| Firestore is correctly set up and used for data storage | 5 pts |
+| Criteria                                                        | Points |
+|-----------------------------------------------------------------|--------|
+| OAuth2 login works using Google Identity Platform               | 5 pts  |
+| Web server works with client-side JavaScript posting to backend | 5 pts  |
+| Web server client-side event listeners                          | 3 pts  |
+| Firestore is correctly set up and used for data storage         | 2 pts  |
 
 ## Submission
 1. **GitHub Repository:**
-   - Ensure your project is in a **GitHub repository**.
-   - The repository should include all necessary files (`main.py`, `Dockerfile`, `docker-compose.yml`, `index.html`, `requirements.txt`, etc.).
+- Ensure your project is in a **GitHub repository**.
+- The repository should include all necessary files (`main.py`, `Dockerfile`, `docker-compose.yml`, `index.html`, `requirements.txt`, etc.).
 
 2. **Deployment:**
-   - Deploy your FastAPI server to **Google Cloud Run**.
-   - Ensure your **Firestore database** is properly configured and accessible by the application.
+- Deploy your FastAPI server to **Google Cloud Run**.
+- Ensure your **Firestore database** is properly configured and accessible by the application.
 
 3. **README File:**
-   - **Update this README with your application URL**
-     - i.e. `https://tabs-vs-spaces-XXXXXX.us-central1.run.app/`
+- **Update this README with your application URL**
+  - i.e. `https://tabs-vs-spaces-XXXXXX.us-central1.run.app/`
 
-4. **Submit Application URL to Canvas:**
+4. **Submit Zip file Canvas:**
+- Cloud Run Logs, Screenshots (Firestore, and Identity Platflow)
+  - screenshot need to include your URL and Project ID

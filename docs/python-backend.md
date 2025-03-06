@@ -1,27 +1,18 @@
-# Python README
+# Python Web Server
 
+---
 ## Overview
 This document provides guidance on the Python FastAPI backend for the project. The backend serves HTML pages, processes form submissions, and interacts with Firestore to store and retrieve votes. The FastAPI server is designed to be deployed on **Google Cloud Run** and supports authentication via **Google Identity Platform**.
 
-### **__Your jobs is to implement the following:__**
-1. GET/POST functions in the [FastAPI backend](../cc_cloud_run/main.py) file
-    - The GET function should return the index.html template with request, tabs/spaces count, and recent votes.
-    - The POST function should handle form submissions from the client-side javascript and store votes in Firestore.
-2. Client-side JavaScript function in the [firestore.js](../cc_cloud_run/static/firestore.js) file
-    - Implement the `vote` function that sends a POST request to the FastAPI backend.
-    - The request should be ContentType `application/x-www-form-urlencoded` with the `team` (either "TABS" or "SPACES") as form data.
-    - The request should pass an Authorization header with the value `Bearer <ID_TOKEN>` where `<ID_TOKEN>` is the user's ID token.
-    - Handle the response by displaying a success message or an error message in case of failure.
-3. Update the [config.js](../cc_cloud_run/static/config.js) file with your Firebase configuration.
-```typescript
-const config = {
-  apiKey: 'AIzaSyDhwsk8Ak...',
-  authDomain: '[PROJECT].firebaseapp.com',
-};
-```
 ---
 
-## Firestore Database Access
+## **__Your jobs is to implement the following:__**
+
+### Step 1: GET/POST functions in the [FastAPI backend](../cc_cloud_run/main.py) file
+- The GET function should return the index.html template with request, tabs/spaces count, and recent votes.
+- The POST function should handle form submissions from the client-side javascript and store votes in Firestore.
+
+#### Firestore Database Access
 Firestore is used as the datastore for the application. The FastAPI backend connects to Firestore to store and retrieve votes. The Firestore client **is already initialized** as follows:
 
 ```python
@@ -31,12 +22,9 @@ db = firestore.Client()
 votes_collection = db.collection("votes")
 ```
 
----
+#### FastAPI Endpoints
 
-## FastAPI Endpoints
-
-### `GET /`
-Returns the main page with the count of votes for "TABS" and "SPACES".
+`GET /` Returns the main page with the count of votes for "TABS" and "SPACES".
 
 ```python
 # init firestore client
@@ -65,8 +53,7 @@ async def read_root(request: Request):
     })
 ```
 
-### `POST /`
-Handles form submissions from the frontend to record votes in Firestore collection.
+`POST /` Handles form submissions from the frontend to record votes in Firestore collection.
 
 ```python
 votes_collection.add({
@@ -81,6 +68,7 @@ Each vote is stored as a document in the `votes` collection, containing the foll
 # use the datetime module to get the current time in ISO format
 datetime.datetime.utcnow().isoformat()
 ```
+---
 
 ## Running Locally
 Since Firestore is being emulated locally, ensure that the FastAPI service is correctly configured to connect to the emulator. The environment variable `FIRESTORE_EMULATOR_HOST=db:8080` is set in `docker-compose.yml`.
